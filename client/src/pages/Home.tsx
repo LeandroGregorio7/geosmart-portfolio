@@ -237,7 +237,7 @@ export default function Home() {
               <div className="project-meta"><span className="project-number">{project.number}</span><span className="project-eyebrow">{project.eyebrow}</span><a className="project-link" href={project.repo} target="_blank" rel="noreferrer" aria-label={`Abrir repositório ${project.name}`}><Github size={16} /></a></div>
               <h3>{project.name}</h3>
               <p>{project.description}</p>
-              <div className="project-footer"><div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-actions"><a href={project.repo} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} /></a>{(project.id === "smart15" || project.id === "baru") && <a href={`/projetos/${project.id}`}>{lang === "pt" ? "ver estudo" : "case study"} <ArrowUpRight size={14} /></a>}</div></div>
+              <div className="project-footer"><div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-actions"><a href={project.repo} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} /></a>{["smart15", "baru", "obia", "thermal", "change"].includes(project.id) && <a href={`/projetos/${project.id === "obia" ? "obia" : project.id === "change" ? "sentinel" : project.id}`}>{lang === "pt" ? "ver estudo" : "case study"} <ArrowUpRight size={14} /></a>}</div></div>
             </article>
           ))}
         </div>
