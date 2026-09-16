@@ -31,6 +31,8 @@ const projects = [
     repo: "https://github.com/LeandroGregorio7/Smart15-Acessibilidade",
     accent: "lime",
     kind: "video",
+    articleImage: "/assets/smart15-study-area.jpg",
+    articleLabel: "figura do manuscrito Smart15",
   },
   {
     id: "obia",
@@ -56,7 +58,9 @@ const projects = [
     categories: ["Plugins", "Pesquisa"],
     repo: "https://github.com/LeandroGregorio7/baru",
     accent: "amber",
-    kind: "metrics",
+    kind: "article",
+    articleImage: "/assets/baru-map-classification.jpg",
+    articleLabel: "classificação multiescalar · Baru",
   },
   {
     id: "change",
@@ -112,13 +116,13 @@ function ProjectVisual({ project }: { project: (typeof projects)[number] }) {
       <div className="project-visual project-video">
         <video
           className="project-video-media"
-          poster={heroImage}
+          poster={project.articleImage || heroImage}
           src={smart15Video}
           controls
           preload="metadata"
           aria-label="Demonstração do Smart15"
         />
-        <div className="video-tag"><Play size={12} fill="currentColor" /> demo público</div>
+        <div className="video-tag"><Play size={12} fill="currentColor" /> demo público · figura real</div>
       </div>
     );
   }
@@ -140,12 +144,24 @@ function ProjectVisual({ project }: { project: (typeof projects)[number] }) {
     );
   }
 
+  if (project.kind === "article") {
+    return (
+      <div className="project-visual article-visual">
+        <img src={project.articleImage} alt="Mapa de classificação do artigo científico sobre Baru" />
+        <div className="article-gradient" />
+        <span className="visual-chip"><ScanLine size={13} /> {project.articleLabel}</span>
+        <span className="article-credit">imagem real · artigo Baru</span>
+      </div>
+    );
+  }
+
   return (
-    <div className={`project-visual still-visual ${project.accent}`}>
-      <img src={project.id === "obia" || project.id === "thermal" ? orbitImage : heroImage} alt="" />
+    <div className={`project-visual still-visual ${project.accent} ${project.articleImage ? "article-visual" : ""}`}>
+      <img src={project.articleImage || (project.id === "smart15" ? "/assets/smart15-study-area.jpg" : project.id === "obia" || project.id === "thermal" ? orbitImage : heroImage)} alt="" />
       <div className="visual-scan" />
       <div className="visual-coordinates">-15.7934° S<br />-47.8823° W</div>
-      <span className="visual-chip"><ScanLine size={13} /> spatial layer</span>
+      <span className="visual-chip"><ScanLine size={13} /> {project.articleLabel || "spatial layer"}</span>
+      {project.articleImage && <span className="article-credit">imagem real · manuscrito Smart15</span>}
     </div>
   );
 }

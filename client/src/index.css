@@ -89,6 +89,11 @@ h1 em, h2 em { color: var(--lime); font-style: normal; }
 .video-tag, .visual-chip { position: absolute; z-index: 1; bottom: 15px; left: 16px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 9px; color: var(--lime); border: 1px solid rgba(199,243,77,.45); background: rgba(7,13,13,.7); backdrop-filter: blur(8px); font: 9px 'DM Mono', monospace; letter-spacing: .06em; text-transform: uppercase; }
 .still-visual img { width: 100%; height: 100%; object-fit: cover; opacity: .68; filter: saturate(.8) contrast(1.15); transition: transform .5s var(--ease-out), opacity .5s ease; }
 .project-card:hover .still-visual img { opacity: .88; transform: scale(1.045); }
+.article-visual { background: #17211c; }
+.article-visual > img { width: 100%; height: 100%; object-fit: cover; opacity: .86; transition: transform .5s var(--ease-out), opacity .5s ease; }
+.project-card:hover .article-visual > img { opacity: 1; transform: scale(1.035); }
+.article-gradient { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg, rgba(7,13,13,.82), transparent 54%); }
+.article-credit { position: absolute; right: 15px; bottom: 17px; color: #dfe5db; opacity: .78; font: 9px 'DM Mono', monospace; letter-spacing: .04em; text-transform: uppercase; }
 .still-visual::after { position: absolute; content: ''; inset: 0; background: linear-gradient(135deg, rgba(199,243,77,.14), transparent 48%); mix-blend-mode: screen; }
 .still-visual.cyan::after { background: linear-gradient(135deg, rgba(78,228,221,.2), transparent 52%); }
 .still-visual.pink::after { background: linear-gradient(135deg, rgba(242,126,154,.2), transparent 52%); }
