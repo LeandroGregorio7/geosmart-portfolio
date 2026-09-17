@@ -112,13 +112,23 @@ const projects = [
 ];
 
 const capabilityItems = [
-  { label: "Geospatial data science", value: "01" },
-  { label: "GIS & remote sensing", value: "02" },
-  { label: "AI / deep learning", value: "03" },
-  { label: "Urban & environmental planning", value: "04" },
+  { pt: "Ciência de dados geoespaciais", en: "Geospatial data science", value: "01" },
+  { pt: "GIS e sensoriamento remoto", en: "GIS & remote sensing", value: "02" },
+  { pt: "IA e deep learning", en: "AI / deep learning", value: "03" },
+  { pt: "Planejamento urbano e ambiental", en: "Urban & environmental planning", value: "04" },
 ];
 
-function ProjectVisual({ project }: { project: (typeof projects)[number] }) {
+const projectEnglish: Record<string, { eyebrow: string; description: string; articleLabel: string }> = {
+  smart15: { eyebrow: "Urban platform · client project", description: "A 15-minute city accessibility analysis for pedestrians and cyclists, combining slope, land-surface temperature, vegetation, street network and mobility profiles.", articleLabel: "Smart15 cover · Drive" },
+  obia: { eyebrow: "Geospatial classification · toolkit", description: "An Object-Based Image Analysis toolkit integrated with the QGIS Processing Toolbox to train, classify and validate imagery using object shape, texture and spectral signature.", articleLabel: "official icon · Smart OBIA" },
+  baru: { eyebrow: "Model validation · QGIS plugin", description: "A plugin for validating raster or vector classifications with reference samples, generating metrics, confusion matrices and PDF, HTML or CSV reports.", articleLabel: "Baru Validator cover · Drive" },
+  change: { eyebrow: "Remote sensing · ArcGIS Online", description: "A web tool for detecting change from Sentinel imagery, making territorial monitoring faster, repeatable and actionable.", articleLabel: "territorial analysis cover · Drive" },
+  thermal: { eyebrow: "Rasters · thermal super-resolution", description: "A GeoLibre plugin that creates higher-resolution thermal imagery from Landsat TIRS and a Sentinel SR2D4 image with Sharp.", articleLabel: "Thermal SR cover · Drive" },
+  lotes: { eyebrow: "Territorial intelligence · urban analysis", description: "Tools for analyzing conflicts and plots, connecting geospatial data to inspection support routines and urban planning.", articleLabel: "DF Legal cover · Drive" },
+};
+
+function ProjectVisual({ project, lang }: { project: (typeof projects)[number]; lang: "pt" | "en" }) {
+  const copy = lang === "en" ? projectEnglish[project.id] : undefined;
   if (project.kind === "video") {
     return (
       <div className="project-visual project-video">
@@ -128,9 +138,9 @@ function ProjectVisual({ project }: { project: (typeof projects)[number] }) {
           src={smart15Video}
           controls
           preload="metadata"
-          aria-label="Demonstração do Smart15"
+          aria-label={lang === "pt" ? "Demonstração do Smart15" : "Smart15 demo"}
         />
-        <div className="video-tag"><Play size={12} fill="currentColor" /> demo público · figura real</div>
+        <div className="video-tag"><Play size={12} fill="currentColor" /> {lang === "pt" ? "demo público · figura real" : "public demo · real figure"}</div>
       </div>
     );
   }
@@ -155,21 +165,21 @@ function ProjectVisual({ project }: { project: (typeof projects)[number] }) {
   if (project.kind === "article") {
     return (
       <div className="project-visual article-visual">
-        <img src={project.articleImage} alt="Mapa de classificação do artigo científico sobre Baru" />
+        <img src={project.articleImage} alt={lang === "pt" ? "Mapa de classificação do artigo científico sobre Baru" : "Classification map from the Baru scientific article"} />
         <div className="article-gradient" />
-        <span className="visual-chip"><ScanLine size={13} /> {project.articleLabel}</span>
-        <span className="article-credit">imagem real · artigo Baru</span>
+        <span className="visual-chip"><ScanLine size={13} /> {copy?.articleLabel || project.articleLabel}</span>
+        <span className="article-credit">{lang === "pt" ? "imagem real · artigo Baru" : "real image · Baru article"}</span>
       </div>
     );
   }
 
   return (
     <div className={`project-visual still-visual ${project.accent} ${project.articleImage ? "article-visual" : ""}`}>
-      <img src={project.articleImage || (project.id === "smart15" ? "/assets/smart15-study-area.jpg" : project.id === "obia" || project.id === "thermal" ? orbitImage : heroImage)} alt="" />
+      <img src={project.articleImage || (project.id === "smart15" ? "/assets/smart15-study-area.jpg" : project.id === "obia" || project.id === "thermal" ? orbitImage : heroImage)} alt={copy?.articleLabel || project.articleLabel || ""} />
       <div className="visual-scan" />
       <div className="visual-coordinates">-15.7934° S<br />-47.8823° W</div>
-      <span className="visual-chip"><ScanLine size={13} /> {project.articleLabel || "spatial layer"}</span>
-      {project.articleImage && <span className="article-credit">imagem real · {project.articleLabel}</span>}
+      <span className="visual-chip"><ScanLine size={13} /> {copy?.articleLabel || project.articleLabel || (lang === "pt" ? "camada espacial" : "spatial layer")}</span>
+      {project.articleImage && <span className="article-credit">{lang === "pt" ? "imagem real · " : "real image · "}{copy?.articleLabel || project.articleLabel}</span>}
     </div>
   );
 }
@@ -217,11 +227,11 @@ export default function Home() {
         <div className="hero-grid" />
         <div className="hero-content container">
           <div className="hero-kicker"><span className="kicker-line" /> {lang === "pt" ? "portfólio de geotecnologia" : "geospatial technology portfolio"} <span className="kicker-index">/ 2026</span></div>
-          <h1>Eu transformo<br /><em>território</em> em<br />decisão.</h1>
+          <h1>{lang === "pt" ? <>Eu transformo<br /><em>território</em> em<br />decisão.</> : <>I turn<br /><em>territory</em> into<br />decisions.</>}</h1>
           <p className="hero-description">{lang === "pt" ? "Soluções espaciais para entender cidades, paisagens e sistemas complexos — do dado bruto à próxima ação." : "Spatial solutions for understanding cities, landscapes and complex systems — from raw data to the next action."}</p>
           <div className="hero-actions"><button className="button button-primary" onClick={() => scrollTo("projetos")}>{lang === "pt" ? "explorar projetos" : "explore projects"} <ArrowUpRight size={17} /></button><a className="button button-ghost" href="https://www.linkedin.com/in/leandrogregoriogeo/" target="_blank" rel="noreferrer">{lang === "pt" ? "ver perfil no LinkedIn" : "view LinkedIn profile"} <Linkedin size={16} /></a></div>
         </div>
-        <div className="hero-foot container"><span>scroll para explorar</span><span className="scroll-line" /><span>01 — 06</span></div>
+        <div className="hero-foot container"><span>{lang === "pt" ? "scroll para explorar" : "scroll to explore"}</span><span className="scroll-line" /><span>01 — 06</span></div>
         <div className="hero-coordinates">15°47'36" S<br />47°52'56" W<br /><span>ALT 1.172 M</span></div>
       </section>
 
@@ -233,23 +243,23 @@ export default function Home() {
         <div className="projects-grid">
           {filteredProjects.map((project) => (
             <article className={`project-card accent-${project.accent}`} key={project.id}>
-              <ProjectVisual project={project} />
-              <div className="project-meta"><span className="project-number">{project.number}</span><span className="project-eyebrow">{project.eyebrow}</span><a className="project-link" href={project.repo} target="_blank" rel="noreferrer" aria-label={`Abrir repositório ${project.name}`}><Github size={16} /></a></div>
+              <ProjectVisual project={project} lang={lang} />
+              <div className="project-meta"><span className="project-number">{project.number}</span><span className="project-eyebrow">{lang === "en" ? projectEnglish[project.id].eyebrow : project.eyebrow}</span><a className="project-link" href={project.repo} target="_blank" rel="noreferrer" aria-label={lang === "pt" ? `Abrir repositório ${project.name}` : `Open ${project.name} repository`}><Github size={16} /></a></div>
               <h3>{project.name}</h3>
-              <p>{project.description}</p>
+              <p>{lang === "en" ? projectEnglish[project.id].description : project.description}</p>
               <div className="project-footer"><div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-actions"><a href={project.repo} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} /></a>{["smart15", "baru", "obia", "thermal", "change"].includes(project.id) && <a href={`/projetos/${project.id === "obia" ? "obia" : project.id === "change" ? "sentinel" : project.id}`}>{lang === "pt" ? "ver estudo" : "case study"} <ArrowUpRight size={14} /></a>}</div></div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="statement-section" id="sobre"><div className="container statement-grid"><div className="statement-index"><span>02 / {lang === "pt" ? "sobre" : "about"}</span><span className="statement-arrow">↘</span></div><div><h2>{lang === "pt" ? <>O território<br />é um <em>sistema.</em></> : <>Territory<br />is a <em>system.</em></>}</h2><p>{lang === "pt" ? "Leandro Gregorio é geógrafo, doutor em Geografia pela UnB e especialista em geotecnologias, sensoriamento remoto e análise espacial aplicada. Há mais de 16 anos, conecta pesquisa, código e políticas urbanas para transformar camadas complexas em escolhas mais claras." : "Leandro Gregorio is a geographer with a PhD from UnB and a specialist in geospatial technologies, remote sensing and applied spatial analysis. For 16+ years, he has connected research, code and urban policy to turn complex layers into clearer choices."}</p><a className="text-link" href="https://br.linkedin.com/in/leandrogregoriogeo" target="_blank" rel="noreferrer">{lang === "pt" ? "conhecer trajetória" : "explore the journey"} <ArrowUpRight size={15} /></a></div><div className="capability-list">{capabilityItems.map((item) => <div className="capability" key={item.value}><span>{item.value}</span><strong>{item.label}</strong><ChevronRight size={15} /></div>)}</div></div></section>
+      <section className="statement-section" id="sobre"><div className="container statement-grid"><div className="statement-index"><span>02 / {lang === "pt" ? "sobre" : "about"}</span><span className="statement-arrow">↘</span></div><div><h2>{lang === "pt" ? <>O território<br />é um <em>sistema.</em></> : <>Territory<br />is a <em>system.</em></>}</h2><p>{lang === "pt" ? "Leandro Gregorio é geógrafo, doutor em Geografia pela UnB e especialista em geotecnologias, sensoriamento remoto e análise espacial aplicada. Há mais de 16 anos, conecta pesquisa, código e políticas urbanas para transformar camadas complexas em escolhas mais claras." : "Leandro Gregorio is a geographer with a PhD from UnB and a specialist in geospatial technologies, remote sensing and applied spatial analysis. For 16+ years, he has connected research, code and urban policy to turn complex layers into clearer choices."}</p><a className="text-link" href="https://br.linkedin.com/in/leandrogregoriogeo" target="_blank" rel="noreferrer">{lang === "pt" ? "conhecer trajetória" : "explore the journey"} <ArrowUpRight size={15} /></a></div><div className="capability-list">{capabilityItems.map((item) => <div className="capability" key={item.value}><span>{item.value}</span><strong>{lang === "pt" ? item.pt : item.en}</strong><ChevronRight size={15} /></div>)}</div></div></section>
 
-      <section className="timeline-section container"><div className="timeline-copy"><span className="eyebrow">experiência em camadas</span><h2>16+ anos<br />lendo o <em>espaço.</em></h2></div><div className="timeline"><div className="timeline-item active"><span>2024 — agora</span><strong>Planejamento urbano & infraestrutura</strong><p>Integração de GIS, IA e dashboards para gestão urbana inteligente em Brasília.</p></div><div className="timeline-item"><span>2009 — 2024</span><strong>Meio ambiente & sensoriamento remoto</strong><p>Risco ambiental, ilhas de calor, queimadas e modelagem espacial aplicada.</p></div><div className="timeline-item"><span>2014 — 2018</span><strong>Doutorado em Geografia · UnB</strong><p>Dinâmica da paisagem urbana e suas interações com a dengue no Distrito Federal.</p></div></div></section>
+      <section className="timeline-section container"><div className="timeline-copy"><span className="eyebrow">{lang === "pt" ? "experiência em camadas" : "layered experience"}</span><h2>{lang === "pt" ? <>16+ anos<br />lendo o <em>espaço.</em></> : <>16+ years<br />reading <em>space.</em></>}</h2></div><div className="timeline"><div className="timeline-item active"><span>{lang === "pt" ? "2024 — agora" : "2024 — now"}</span><strong>{lang === "pt" ? "Planejamento urbano & infraestrutura" : "Urban planning & infrastructure"}</strong><p>{lang === "pt" ? "Integração de GIS, IA e dashboards para gestão urbana inteligente em Brasília." : "Integrating GIS, AI and dashboards for intelligent urban management in Brasília."}</p></div><div className="timeline-item"><span>2009 — 2024</span><strong>{lang === "pt" ? "Meio ambiente & sensoriamento remoto" : "Environment & remote sensing"}</strong><p>{lang === "pt" ? "Risco ambiental, ilhas de calor, queimadas e modelagem espacial aplicada." : "Environmental risk, heat islands, fires and applied spatial modeling."}</p></div><div className="timeline-item"><span>2014 — 2018</span><strong>{lang === "pt" ? "Doutorado em Geografia · UnB" : "PhD in Geography · UnB"}</strong><p>{lang === "pt" ? "Dinâmica da paisagem urbana e suas interações com a dengue no Distrito Federal." : "Urban landscape dynamics and their interactions with dengue in the Federal District."}</p></div></div></section>
 
-      <section className="contact-section" id="contato"><img src={orbitImage} alt="" className="contact-image" /><div className="contact-overlay" /><div className="container contact-content"><span className="eyebrow">03 / contato</span><h2>Vamos mapear<br /><em>o próximo.</em></h2><p>Tem um território complexo, uma pergunta difícil ou um projeto que precisa ganhar escala?</p><a className="button button-primary" href="mailto:contato@geosmart.online">entrar em contato <ArrowUpRight size={17} /></a><div className="contact-details"><a href="mailto:contato@geosmart.online">contato@geosmart.online</a><span>Brasília · Brasil</span><a href="https://github.com/LeandroGregorio7" target="_blank" rel="noreferrer"><Github size={16} /> GitHub</a></div></div></section>
+      <section className="contact-section" id="contato"><img src={orbitImage} alt="" className="contact-image" /><div className="contact-overlay" /><div className="container contact-content"><span className="eyebrow">03 / {lang === "pt" ? "contato" : "contact"}</span><h2>{lang === "pt" ? <>Vamos mapear<br /><em>o próximo.</em></> : <>Let's map<br /><em>what's next.</em></>}</h2><p>{lang === "pt" ? "Tem um território complexo, uma pergunta difícil ou um projeto que precisa ganhar escala?" : "Do you have a complex territory, a difficult question or a project ready to scale?"}</p><a className="button button-primary" href="mailto:contato@geosmart.online">{lang === "pt" ? "entrar em contato" : "get in touch"} <ArrowUpRight size={17} /></a><div className="contact-details"><a href="mailto:contato@geosmart.online">contato@geosmart.online</a><span>Brasília · Brasil</span><a href="https://github.com/LeandroGregorio7" target="_blank" rel="noreferrer"><Github size={16} /> GitHub</a></div></div></section>
 
-      <footer className="site-footer container"><a className="brand" href="#top"><span className="brand-mark"><Map size={15} /></span><span>GeoSmart<span className="brand-dot">.</span></span></a><span>© 2026 Leandro Gregorio</span><span>geotecnologia com intenção</span><a href="#top" className="back-top">voltar ao topo ↑</a></footer>
+      <footer className="site-footer container"><a className="brand" href="#top"><span className="brand-mark"><Map size={15} /></span><span>GeoSmart<span className="brand-dot">.</span></span></a><span>© 2026 Leandro Gregorio</span><span>{lang === "pt" ? "geotecnologia com intenção" : "geospatial technology with intent"}</span><a href="#top" className="back-top">{lang === "pt" ? "voltar ao topo" : "back to top"} ↑</a></footer>
     </main>
   );
 }
