@@ -244,10 +244,10 @@ export default function Home() {
           {filteredProjects.map((project) => (
             <article className={`project-card accent-${project.accent}`} key={project.id}>
               <ProjectVisual project={project} lang={lang} />
-              <div className="project-meta"><span className="project-number">{project.number}</span><span className="project-eyebrow">{lang === "en" ? projectEnglish[project.id].eyebrow : project.eyebrow}</span><a className="project-link" href={project.repo} target="_blank" rel="noreferrer" aria-label={lang === "pt" ? `Abrir repositório ${project.name}` : `Open ${project.name} repository`}><Github size={16} /></a></div>
+              <div className="project-meta"><span className="project-number">{project.number}</span><span className="project-eyebrow">{lang === "en" ? projectEnglish[project.id].eyebrow : project.eyebrow}</span><a className="project-link" href={project.repo} rel="noreferrer" aria-label={lang === "pt" ? `Abrir repositório ${project.name}` : `Open ${project.name} repository`}><Github size={16} /></a></div>
               <h3>{project.name}</h3>
               <p>{lang === "en" ? projectEnglish[project.id].description : project.description}</p>
-              <div className="project-footer"><div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-actions"><a href={project.repo} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} /></a>{["smart15", "baru", "obia", "thermal", "change"].includes(project.id) && <a href={`/projetos/${project.id === "obia" ? "obia" : project.id === "change" ? "sentinel" : project.id}`}>{lang === "pt" ? "ver estudo" : "case study"} <ArrowUpRight size={14} /></a>}</div></div>
+              <div className="project-footer"><div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-actions"><a href={project.repo} rel="noreferrer">GitHub <ArrowUpRight size={14} /></a>{["smart15", "baru", "obia", "thermal", "change"].includes(project.id) && <a href={`/projetos/${project.id === "obia" ? "obia" : project.id === "change" ? "sentinel" : project.id}`}>{lang === "pt" ? "ver estudo" : "case study"} <ArrowUpRight size={14} /></a>}</div></div>
             </article>
           ))}
         </div>
