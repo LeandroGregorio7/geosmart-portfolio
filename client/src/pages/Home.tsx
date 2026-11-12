@@ -133,6 +133,24 @@ const capabilityItems = [
   { pt: "Planejamento urbano e ambiental", en: "Urban & environmental planning", value: "04" },
 ];
 
+const researchProjects = [
+  {
+    period: "2016 — 2018",
+    title: "JEAI GITES-Brasil — Gestão, Indicador e Território: Ambiente e Saúde",
+    summary: "Pesquisa interdisciplinar para desenvolver métodos, indicadores e sistemas de monitoramento e alerta sobre disparidades espaciais em saúde e dinâmicas socioambientais.",
+  },
+  {
+    period: "2009 — 2011",
+    title: "Eficiência climático-urbana em Duque de Caxias/RJ",
+    summary: "Estudo comparativo do clima urbano, conforto térmico, qualidade do ar e impactos pluviais, combinando dados de campo, estações oficiais e análise espacial.",
+  },
+  {
+    period: "2006 — 2008",
+    title: "Eficiência climático-urbana na Baixada Fluminense",
+    summary: "Pesquisa sobre ilhas de calor, poluição ambiental e prevenção de impactos de chuvas intensas, articulando monitoramento, mapeamento e educação ambiental.",
+  },
+];
+
 const projectEnglish: Record<string, { eyebrow: string; description: string; articleLabel: string }> = {
   smart15: { eyebrow: "Urban platform · client project", description: "A 15-minute city accessibility analysis for pedestrians and cyclists, combining slope, land-surface temperature, vegetation, street network and mobility profiles.", articleLabel: "Smart15 cover · Drive" },
   obia: { eyebrow: "Geospatial classification · toolkit", description: "An Object-Based Image Analysis toolkit integrated with the QGIS Processing Toolbox to train, classify and validate imagery using object shape, texture and spectral signature.", articleLabel: "official icon · Smart OBIA" },
@@ -266,7 +284,7 @@ export default function Home() {
         <div className="projects-grid">
           {filteredProjects.map((project) => (
             <article className={`project-card accent-${project.accent}`} key={project.id}>
-              <ProjectVisual project={project} lang={lang} />
+              <a className="project-visual-anchor" href={project.repo} target="_blank" rel="noreferrer" aria-label={lang === "pt" ? `Abrir projeto ${project.name} no GitHub` : `Open ${project.name} on GitHub`}><ProjectVisual project={project} lang={lang} /></a>
               <div className="project-meta"><span className="project-number">{project.number}</span><span className="project-eyebrow">{lang === "en" ? projectEnglish[project.id].eyebrow : project.eyebrow}</span><a className="project-link" href={project.repo} rel="noreferrer" aria-label={lang === "pt" ? `Abrir repositório ${project.name}` : `Open ${project.name} repository`}><Github size={16} /></a></div>
               <h3>{project.name}{project.id === "smart15" && <span className="registry-badge">INPI</span>}</h3>
               <p>{lang === "en" ? projectEnglish[project.id].description : project.description}</p>
@@ -279,6 +297,8 @@ export default function Home() {
       <section className="statement-section" id="sobre"><div className="container statement-grid"><div className="statement-index"><span>02 / {lang === "pt" ? "sobre" : "about"}</span><span className="statement-arrow">↘</span></div><div><h2>{lang === "pt" ? <>O território<br />é um <em>sistema.</em></> : <>Territory<br />is a <em>system.</em></>}</h2><p>{lang === "pt" ? "Leandro Gregorio é geógrafo, doutor em Geografia pela UnB e especialista em geotecnologias, sensoriamento remoto e análise espacial aplicada. Há mais de 16 anos, conecta pesquisa, código e políticas urbanas para transformar camadas complexas em escolhas mais claras." : "Leandro Gregorio is a geographer with a PhD from UnB and a specialist in geospatial technologies, remote sensing and applied spatial analysis. For 16+ years, he has connected research, code and urban policy to turn complex layers into clearer choices."}</p><a className="text-link" href="http://lattes.cnpq.br/3852290153832016" target="_blank" rel="noreferrer">{lang === "pt" ? "ver currículo Lattes" : "view Lattes CV"} <ArrowUpRight size={15} /></a></div><div className="capability-list">{capabilityItems.map((item) => <div className="capability" key={item.value}><span>{item.value}</span><strong>{lang === "pt" ? item.pt : item.en}</strong><ChevronRight size={15} /></div>)}</div></div></section>
 
       <section className="timeline-section container"><div className="timeline-copy"><span className="eyebrow">{lang === "pt" ? "experiência em camadas" : "layered experience"}</span><h2>{lang === "pt" ? <>16+ anos<br />lendo o <em>espaço.</em></> : <>16+ years<br />reading <em>space.</em></>}</h2></div><div className="timeline"><div className="timeline-item active"><span>{lang === "pt" ? "2024 — agora" : "2024 — now"}</span><strong>{lang === "pt" ? "Planejamento urbano & infraestrutura" : "Urban planning & infrastructure"}</strong><p>{lang === "pt" ? "Integração de GIS, IA e dashboards para gestão urbana inteligente em Brasília." : "Integrating GIS, AI and dashboards for intelligent urban management in Brasília."}</p></div><div className="timeline-item"><span>2009 — 2024</span><strong>{lang === "pt" ? "Meio ambiente & sensoriamento remoto" : "Environment & remote sensing"}</strong><p>{lang === "pt" ? "Risco ambiental, ilhas de calor, queimadas e modelagem espacial aplicada." : "Environmental risk, heat islands, fires and applied spatial modeling."}</p></div><div className="timeline-item"><span>2014 — 2018</span><strong>{lang === "pt" ? "Doutorado em Geografia · UnB" : "PhD in Geography · UnB"}</strong><p>{lang === "pt" ? "Dinâmica da paisagem urbana e suas interações com a dengue no Distrito Federal." : "Urban landscape dynamics and their interactions with dengue in the Federal District."}</p></div></div></section>
+
+      <section className="research-section container" id="pesquisa"><div className="research-heading"><div><span className="eyebrow">04 / {lang === "pt" ? "outros projetos de pesquisa" : "other research projects"}</span><h2>{lang === "pt" ? <>Pesquisa que<br /><em>forma repertório.</em></> : <>Research that<br /><em>builds context.</em></>}</h2></div><a className="text-link" href="http://buscatextual.cnpq.br/buscatextual/visualizacv.do#ProjetosPesquisa" target="_blank" rel="noreferrer">{lang === "pt" ? "ver seção no Lattes" : "view Lattes section"} <ArrowUpRight size={15} /></a></div><div className="research-list">{researchProjects.map((item) => <article className="research-item" key={item.title}><span>{item.period}</span><div><h3>{item.title}</h3><p>{item.summary}</p></div></article>)}</div></section>
 
       <section className="contact-section" id="contato"><img src={orbitImage} alt="" className="contact-image" /><div className="contact-overlay" /><div className="container contact-content"><span className="eyebrow">03 / {lang === "pt" ? "contato" : "contact"}</span><h2>{lang === "pt" ? <>Vamos mapear<br /><em>o próximo.</em></> : <>Let's map<br /><em>what's next.</em></>}</h2><p>{lang === "pt" ? "Tem um território complexo, uma pergunta difícil ou um projeto que precisa ganhar escala?" : "Do you have a complex territory, a difficult question or a project ready to scale?"}</p><a className="button button-primary" href="mailto:contato@geosmart.online">{lang === "pt" ? "entrar em contato" : "get in touch"} <ArrowUpRight size={17} /></a><div className="contact-details"><a href="mailto:contato@geosmart.online">contato@geosmart.online</a><span>Brasília · Brasil</span><a href="https://github.com/LeandroGregorio7" target="_blank" rel="noreferrer"><Github size={16} /> GitHub</a></div></div></section>
 
