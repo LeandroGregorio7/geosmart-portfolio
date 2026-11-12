@@ -23,10 +23,10 @@ const projects = [
     id: "smart15",
     number: "01",
     name: "Smart15",
-    eyebrow: "Plataforma urbana · projeto cliente",
+    eyebrow: "GeoIA urbana · programa registrado no INPI",
     description:
-      "Análise de acessibilidade na cidade de 15 minutos para pedestres e ciclistas, combinando declividade, temperatura da superfície, vegetação, rede viária e perfil de mobilidade.",
-    tags: ["GeoLibre", "Python", "FastAPI"],
+      "Plataforma de GeoIA para simular acessibilidade a pé e de bicicleta, combinando declividade, temperatura da superfície, vegetação, rede viária e perfis de mobilidade.",
+    tags: ["GeoIA", "GeoLibre", "INPI"],
     categories: ["Plataformas", "Cliente"],
     repo: "https://github.com/LeandroGregorio7/Smart15-Acessibilidade",
     accent: "lime",
@@ -83,10 +83,10 @@ const projects = [
     id: "thermal",
     number: "05",
     name: "Thermal SR",
-    eyebrow: "Rasters · super-resolução térmica",
+    eyebrow: "GeoIA ambiental · super-resolução térmica",
     description:
-      "Plugin GeoLibre que cria imagens térmicas de maior resolução a partir do Landsat TIRS e uma imagem Sentinel SR2D4 com Sharp.",
-    tags: ["Landsat", "Sentinel", "GeoLibre"],
+      "Aplicação que estima LST em maior detalhe a partir de SR2D4 e Landsat, apoiando estudos de ilhas de calor, conforto térmico, cobertura do solo e leitura ambiental.",
+    tags: ["GeoIA", "Landsat", "LST"],
     categories: ["Plugins", "Pesquisa"],
     repo: "https://github.com/LeandroGregorio7/lst-super-resolution",
     accent: "cyan",
@@ -109,6 +109,21 @@ const projects = [
     articleImage: "/assets/cover-dflegal-drive.jpg",
     articleLabel: "capa DF Legal · Drive",
   },
+  {
+    id: "ilha",
+    number: "07",
+    name: "Ilha Perdida — Mapa Interativo",
+    eyebrow: "Ensino · simulação geográfica",
+    description:
+      "Aplicação didática que transforma uma narrativa literária em mapa interativo, com camadas, pontos arrastáveis, navegação e simulação de chuva para apoiar o ensino de Geografia.",
+    tags: ["Ensino", "Simulação", "Mapa web"],
+    categories: ["Plataformas", "Pesquisa"],
+    repo: "https://github.com/LeandroGregorio7/ilha_perdida_mapa_dinamico",
+    accent: "amber",
+    kind: "image",
+    articleImage: "/assets/geosmart-topography.jpg",
+    articleLabel: "mapa didático interativo",
+  },
 ];
 
 const capabilityItems = [
@@ -125,6 +140,7 @@ const projectEnglish: Record<string, { eyebrow: string; description: string; art
   change: { eyebrow: "Remote sensing · ArcGIS Online", description: "A web tool for detecting change from Sentinel imagery, making territorial monitoring faster, repeatable and actionable.", articleLabel: "territorial analysis cover · Drive" },
   thermal: { eyebrow: "Rasters · thermal super-resolution", description: "A GeoLibre plugin that creates higher-resolution thermal imagery from Landsat TIRS and a Sentinel SR2D4 image with Sharp.", articleLabel: "Thermal SR cover · Drive" },
   lotes: { eyebrow: "Territorial intelligence · urban analysis", description: "Tools for analyzing conflicts and plots, connecting geospatial data to inspection support routines and urban planning.", articleLabel: "DF Legal cover · Drive" },
+  ilha: { eyebrow: "Education · geographic simulation", description: "A didactic application that turns a literary narrative into an interactive map with layers, draggable points, navigation and a rain simulation for Geography teaching.", articleLabel: "interactive didactic map" },
 };
 
 function ProjectVisual({ project, lang }: { project: (typeof projects)[number]; lang: "pt" | "en" }) {
@@ -228,18 +244,20 @@ export default function Home() {
         <div className="hero-content container">
           <div className="hero-kicker"><span className="kicker-line" /> {lang === "pt" ? "portfólio de geotecnologia" : "geospatial technology portfolio"} <span className="kicker-index">/ 2026</span></div>
           <h1>{lang === "pt" ? <>Eu transformo<br /><em>território</em> em<br />decisão.</> : <>I turn<br /><em>territory</em> into<br />decisions.</>}</h1>
-          <p className="hero-description">{lang === "pt" ? "Soluções espaciais para entender cidades, paisagens e sistemas complexos — do dado bruto à próxima ação." : "Spatial solutions for understanding cities, landscapes and complex systems — from raw data to the next action."}</p>
+          <p className="hero-description">{lang === "pt" ? "GEOIA, sensoriamento remoto e análise espacial para transformar dados territoriais em decisões urbanas, ambientais e sociais." : "GEOAI, remote sensing and spatial analysis to turn territorial data into urban, environmental and social decisions."}</p>
           <div className="hero-actions"><button className="button button-primary" onClick={() => scrollTo("projetos")}>{lang === "pt" ? "explorar projetos" : "explore projects"} <ArrowUpRight size={17} /></button><a className="button button-ghost" href="https://www.linkedin.com/in/leandrogregoriogeo/" target="_blank" rel="noreferrer">{lang === "pt" ? "ver perfil no LinkedIn" : "view LinkedIn profile"} <Linkedin size={16} /></a></div>
         </div>
         <div className="hero-foot container"><span>{lang === "pt" ? "scroll para explorar" : "scroll to explore"}</span><span className="scroll-line" /><span>01 — 06</span></div>
         <div className="hero-coordinates">15°47'36" S<br />47°52'56" W<br /><span>ALT 1.172 M</span></div>
       </section>
 
-      <section className="signal-strip"><div className="container signal-inner"><span className="signal-label"><Radio size={14} /> {lang === "pt" ? "sinal aberto" : "open signal"}</span><p>{lang === "pt" ? "Dados espaciais, inteligência artificial e planejamento urbano em uma mesma camada de leitura." : "Spatial data, artificial intelligence and urban planning in the same layer of interpretation."}</p><span className="signal-rule" /><span className="signal-label">GIS / AI / RS</span></div></section>
+      <section className="signal-strip"><div className="container signal-inner"><span className="signal-label"><Radio size={14} /> {lang === "pt" ? "sinal aberto" : "open signal"}</span><p>{lang === "pt" ? "GeoIA, dados espaciais e sensoriamento remoto em uma mesma camada de decisão." : "GeoAI, spatial data and remote sensing in the same decision layer."}</p><span className="signal-rule" /><span className="signal-label">GEOIA / GIS / RS</span></div></section>
+
+      <section className="registry-strip container"><div><span className="eyebrow">{lang === "pt" ? "registro de programa de computador" : "software registration"}</span><h2>{lang === "pt" ? <>SMART15 reconhecido pelo <em>INPI.</em></> : <>SMART15 registered with <em>INPI.</em></>}</h2><p>{lang === "pt" ? "Certificado BR512026009558-1, expedido em 27/10/2026. Um marco para a aplicação de GeoIA em acessibilidade e mobilidade urbana." : "Certificate BR512026009558-1, issued on October 27, 2026. A milestone for GeoAI applied to accessibility and urban mobility."}</p></div><a className="button button-primary" href="/assets/registro-smart15-inpi.pdf" target="_blank" rel="noreferrer">{lang === "pt" ? "abrir certificado" : "open certificate"} <ArrowUpRight size={16} /></a></section>
 
       <section className="what-section container" aria-labelledby="what-title">
         <div className="what-intro"><span className="eyebrow">00 / {lang === "pt" ? "quem sou eu" : "who I am"}</span><h2 id="what-title">{lang === "pt" ? <>Eu leio o território<br />para <em>melhorar decisões.</em></> : <>I read territory<br />to <em>improve decisions.</em></>}</h2><p>{lang === "pt" ? "Sou Leandro Gregorio, geógrafo, doutor em Geografia pela UnB e desenvolvedor de soluções geoespaciais. Uno pesquisa, código e planejamento para transformar dados difíceis em informação que pessoas, equipes e cidades conseguem usar." : "I am Leandro Gregorio, a geographer, PhD in Geography from UnB, and geospatial solutions developer. I connect research, code and planning to turn difficult data into information that people, teams and cities can use."}</p><a className="text-link" href="https://www.linkedin.com/in/leandrogregoriogeo/" target="_blank" rel="noreferrer">{lang === "pt" ? "ver perfil completo" : "view full profile"} <Linkedin size={15} /></a></div>
-        <div className="what-services"><span className="eyebrow">01 / {lang === "pt" ? "o que eu faço" : "what I do"}</span><div className="service-grid"><article><span className="service-number">01</span><h3>{lang === "pt" ? "Transformo dados em leitura territorial" : "I turn data into territorial insight"}</h3><p>{lang === "pt" ? "Integro GIS, sensoriamento remoto, IA e análise espacial para revelar padrões, riscos, oportunidades e prioridades." : "I combine GIS, remote sensing, AI and spatial analysis to reveal patterns, risks, opportunities and priorities."}</p></article><article><span className="service-number">02</span><h3>{lang === "pt" ? "Crio plugins que resolvem trabalho real" : "I build plugins for real work"}</h3><p>{lang === "pt" ? "Automatizo rotinas no QGIS, GeoLibre e ArcGIS para que equipes validem, classifiquem, comparem e processem mais rápido." : "I automate workflows in QGIS, GeoLibre and ArcGIS so teams can validate, classify, compare and process faster."}</p></article><article><span className="service-number">03</span><h3>{lang === "pt" ? "Conecto tecnologia a consequência" : "I connect technology to consequence"}</h3><p>{lang === "pt" ? "O resultado não é apenas um mapa ou um plugin: é uma decisão mais segura, uma fiscalização mais objetiva e um território melhor cuidado." : "The outcome is not just a map or a plugin: it is a safer decision, more objective inspection and a better cared-for territory."}</p></article></div></div>
+        <div className="what-services"><span className="eyebrow">01 / {lang === "pt" ? "o que eu faço" : "what I do"}</span><div className="service-grid"><article><span className="service-number">01</span><h3>{lang === "pt" ? "Transformo dados em leitura territorial" : "I turn data into territorial insight"}</h3><p>{lang === "pt" ? "Integro GeoIA, GIS, sensoriamento remoto e análise espacial para revelar padrões, riscos, oportunidades e prioridades." : "I combine GeoAI, GIS, remote sensing and spatial analysis to reveal patterns, risks, opportunities and priorities."}</p></article><article><span className="service-number">02</span><h3>{lang === "pt" ? "Fortaleço o ecossistema QGIS" : "I strengthen the QGIS ecosystem"}</h3><p>{lang === "pt" ? "Smart OBIA, Baru e Thermal SR levam classificação, validação, super-resolução e relatórios para fluxos de trabalho reais no QGIS e GeoLibre." : "Smart OBIA, Baru and Thermal SR bring classification, validation, super-resolution and reporting into real QGIS and GeoLibre workflows."}</p></article><article><span className="service-number">03</span><h3>{lang === "pt" ? "Conecto tecnologia a consequência" : "I connect technology to consequence"}</h3><p>{lang === "pt" ? "O resultado não é apenas um mapa ou um plugin: é uma decisão mais segura, uma fiscalização mais objetiva e um território melhor cuidado." : "The outcome is not just a map or a plugin: it is a safer decision, more objective inspection and a better cared-for territory."}</p></article></div></div>
       </section>
 
       <section className="projects-section container" id="projetos">
@@ -250,7 +268,7 @@ export default function Home() {
             <article className={`project-card accent-${project.accent}`} key={project.id}>
               <ProjectVisual project={project} lang={lang} />
               <div className="project-meta"><span className="project-number">{project.number}</span><span className="project-eyebrow">{lang === "en" ? projectEnglish[project.id].eyebrow : project.eyebrow}</span><a className="project-link" href={project.repo} rel="noreferrer" aria-label={lang === "pt" ? `Abrir repositório ${project.name}` : `Open ${project.name} repository`}><Github size={16} /></a></div>
-              <h3>{project.name}</h3>
+              <h3>{project.name}{project.id === "smart15" && <span className="registry-badge">INPI</span>}</h3>
               <p>{lang === "en" ? projectEnglish[project.id].description : project.description}</p>
               <div className="project-footer"><div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-actions"><a href={project.repo} rel="noreferrer">GitHub <ArrowUpRight size={14} /></a></div></div>
             </article>
@@ -258,7 +276,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="statement-section" id="sobre"><div className="container statement-grid"><div className="statement-index"><span>02 / {lang === "pt" ? "sobre" : "about"}</span><span className="statement-arrow">↘</span></div><div><h2>{lang === "pt" ? <>O território<br />é um <em>sistema.</em></> : <>Territory<br />is a <em>system.</em></>}</h2><p>{lang === "pt" ? "Leandro Gregorio é geógrafo, doutor em Geografia pela UnB e especialista em geotecnologias, sensoriamento remoto e análise espacial aplicada. Há mais de 16 anos, conecta pesquisa, código e políticas urbanas para transformar camadas complexas em escolhas mais claras." : "Leandro Gregorio is a geographer with a PhD from UnB and a specialist in geospatial technologies, remote sensing and applied spatial analysis. For 16+ years, he has connected research, code and urban policy to turn complex layers into clearer choices."}</p><a className="text-link" href="https://br.linkedin.com/in/leandrogregoriogeo" target="_blank" rel="noreferrer">{lang === "pt" ? "conhecer trajetória" : "explore the journey"} <ArrowUpRight size={15} /></a></div><div className="capability-list">{capabilityItems.map((item) => <div className="capability" key={item.value}><span>{item.value}</span><strong>{lang === "pt" ? item.pt : item.en}</strong><ChevronRight size={15} /></div>)}</div></div></section>
+      <section className="statement-section" id="sobre"><div className="container statement-grid"><div className="statement-index"><span>02 / {lang === "pt" ? "sobre" : "about"}</span><span className="statement-arrow">↘</span></div><div><h2>{lang === "pt" ? <>O território<br />é um <em>sistema.</em></> : <>Territory<br />is a <em>system.</em></>}</h2><p>{lang === "pt" ? "Leandro Gregorio é geógrafo, doutor em Geografia pela UnB e especialista em geotecnologias, sensoriamento remoto e análise espacial aplicada. Há mais de 16 anos, conecta pesquisa, código e políticas urbanas para transformar camadas complexas em escolhas mais claras." : "Leandro Gregorio is a geographer with a PhD from UnB and a specialist in geospatial technologies, remote sensing and applied spatial analysis. For 16+ years, he has connected research, code and urban policy to turn complex layers into clearer choices."}</p><a className="text-link" href="http://lattes.cnpq.br/3852290153832016" target="_blank" rel="noreferrer">{lang === "pt" ? "ver currículo Lattes" : "view Lattes CV"} <ArrowUpRight size={15} /></a></div><div className="capability-list">{capabilityItems.map((item) => <div className="capability" key={item.value}><span>{item.value}</span><strong>{lang === "pt" ? item.pt : item.en}</strong><ChevronRight size={15} /></div>)}</div></div></section>
 
       <section className="timeline-section container"><div className="timeline-copy"><span className="eyebrow">{lang === "pt" ? "experiência em camadas" : "layered experience"}</span><h2>{lang === "pt" ? <>16+ anos<br />lendo o <em>espaço.</em></> : <>16+ years<br />reading <em>space.</em></>}</h2></div><div className="timeline"><div className="timeline-item active"><span>{lang === "pt" ? "2024 — agora" : "2024 — now"}</span><strong>{lang === "pt" ? "Planejamento urbano & infraestrutura" : "Urban planning & infrastructure"}</strong><p>{lang === "pt" ? "Integração de GIS, IA e dashboards para gestão urbana inteligente em Brasília." : "Integrating GIS, AI and dashboards for intelligent urban management in Brasília."}</p></div><div className="timeline-item"><span>2009 — 2024</span><strong>{lang === "pt" ? "Meio ambiente & sensoriamento remoto" : "Environment & remote sensing"}</strong><p>{lang === "pt" ? "Risco ambiental, ilhas de calor, queimadas e modelagem espacial aplicada." : "Environmental risk, heat islands, fires and applied spatial modeling."}</p></div><div className="timeline-item"><span>2014 — 2018</span><strong>{lang === "pt" ? "Doutorado em Geografia · UnB" : "PhD in Geography · UnB"}</strong><p>{lang === "pt" ? "Dinâmica da paisagem urbana e suas interações com a dengue no Distrito Federal." : "Urban landscape dynamics and their interactions with dengue in the Federal District."}</p></div></div></section>
 
