@@ -35,8 +35,23 @@ const projects = [
     articleLabel: "capa Smart15 · Drive",
   },
   {
-    id: "obia",
+    id: "smartdem",
     number: "02",
+    name: "SmartDEM",
+    eyebrow: "GeoIA topográfica · hidrologia D8 · motor Smart15",
+    description:
+      "WebApp client-side que faz downscaling guiado de MDEs de 30 m para 2 m e reúne microtopografia urbana, análise de relevo, hidrologia D8 e impedância de caminhada e ciclismo.",
+    tags: ["GeoIA", "MDE 2 m", "D8"],
+    categories: ["Plataformas", "Pesquisa"],
+    repo: "https://github.com/LeandroGregorio7/SmartDEM",
+    accent: "lime",
+    kind: "image",
+    articleImage: "/assets/geosmart-topography.jpg",
+    articleLabel: "topografia e relevo · SmartDEM",
+  },
+  {
+    id: "obia",
+    number: "03",
     name: "Smart OBIA",
     eyebrow: "Classificação geoespacial · toolkit",
     description:
@@ -51,7 +66,7 @@ const projects = [
   },
   {
     id: "baru",
-    number: "03",
+    number: "04",
     name: "Baru Validator",
     eyebrow: "Validação de modelos · plugin QGIS",
     description:
@@ -66,7 +81,7 @@ const projects = [
   },
   {
     id: "change",
-    number: "04",
+    number: "05",
     name: "Sentinel Change",
     eyebrow: "Sensoriamento remoto · ArcGIS Online",
     description:
@@ -81,7 +96,7 @@ const projects = [
   },
   {
     id: "thermal",
-    number: "05",
+    number: "06",
     name: "Thermal SR",
     eyebrow: "GeoIA ambiental · super-resolução térmica",
     description:
@@ -96,7 +111,7 @@ const projects = [
   },
   {
     id: "lotes",
-    number: "06",
+    number: "07",
     name: "Lotes DF Legal",
     eyebrow: "Inteligência territorial · análise urbana",
     description:
@@ -111,7 +126,7 @@ const projects = [
   },
   {
     id: "ilha",
-    number: "07",
+    number: "08",
     name: "Ilha Perdida — Mapa Interativo",
     eyebrow: "Ensino · simulação geográfica",
     description:
@@ -154,6 +169,7 @@ const researchProjects = [
 const projectEnglish: Record<string, { eyebrow: string; description: string; articleLabel: string }> = {
   smart15: { eyebrow: "Urban platform · client project", description: "A 15-minute city accessibility analysis for pedestrians and cyclists, combining slope, land-surface temperature, vegetation, street network and mobility profiles.", articleLabel: "Smart15 cover · Drive" },
   obia: { eyebrow: "Geospatial classification · toolkit", description: "An Object-Based Image Analysis toolkit integrated with the QGIS Processing Toolbox to train, classify and validate imagery using object shape, texture and spectral signature.", articleLabel: "official icon · Smart OBIA" },
+  smartdem: { eyebrow: "Topographic GeoAI · D8 hydrology · Smart15 engine", description: "A client-side web app that guides downscaling of 30 m DEMs to 2 m and combines urban microtopography, terrain analysis, D8 hydrology and walking/cycling impedance.", articleLabel: "topography and terrain · SmartDEM" },
   baru: { eyebrow: "Model validation · QGIS plugin", description: "A plugin for validating raster or vector classifications with reference samples, generating metrics, confusion matrices and PDF, HTML or CSV reports.", articleLabel: "Baru Validator cover · Drive" },
   change: { eyebrow: "Remote sensing · ArcGIS Online", description: "A web tool for detecting change from Sentinel imagery, making territorial monitoring faster, repeatable and actionable.", articleLabel: "territorial analysis cover · Drive" },
   thermal: { eyebrow: "Rasters · thermal super-resolution", description: "A GeoLibre plugin that creates higher-resolution thermal imagery from Landsat TIRS and a Sentinel SR2D4 image with Sharp.", articleLabel: "Thermal SR cover · Drive" },
@@ -283,12 +299,12 @@ export default function Home() {
         <div className="filter-row"><span>{lang === "pt" ? "filtrar por" : "filter by"}</span>{["Todos", "Plataformas", "Plugins", "Pesquisa", "Cliente"].map((item) => <button key={item} className={filter === item ? "active" : ""} onClick={() => setFilter(item)}>{lang === "en" ? ({ Todos: "All", Plataformas: "Platforms", Plugins: "Plugins", Pesquisa: "Research", Cliente: "Client" } as Record<string,string>)[item] : item}</button>)}</div>
         <div className="projects-grid">
           {filteredProjects.map((project) => (
-            <article className={`project-card accent-${project.accent}`} key={project.id}>
+            <article className={`project-card accent-${project.accent} ${project.id === "smartdem" ? "featured" : ""}`} key={project.id}>
               <a className="project-visual-anchor" href={project.repo} target="_blank" rel="noreferrer" aria-label={lang === "pt" ? `Abrir projeto ${project.name} no GitHub` : `Open ${project.name} on GitHub`}><ProjectVisual project={project} lang={lang} /></a>
               <div className="project-meta"><span className="project-number">{project.number}</span><span className="project-eyebrow">{lang === "en" ? projectEnglish[project.id].eyebrow : project.eyebrow}</span><a className="project-link" href={project.repo} rel="noreferrer" aria-label={lang === "pt" ? `Abrir repositório ${project.name}` : `Open ${project.name} repository`}><Github size={16} /></a></div>
-              <h3>{project.name}{project.id === "smart15" && <span className="registry-badge">INPI</span>}</h3>
+              <h3>{project.name}{project.id === "smart15" && <span className="registry-badge">INPI</span>}{project.id === "smartdem" && <span className="registry-badge">TRÍADE</span>}</h3>
               <p>{lang === "en" ? projectEnglish[project.id].description : project.description}</p>
-              <div className="project-footer"><div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-actions"><a href={project.repo} rel="noreferrer">GitHub <ArrowUpRight size={14} /></a></div></div>
+              <div className="project-footer"><div className="tag-list">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><div className="project-actions"><a href={`/projetos/${project.id}`}>{lang === "pt" ? "ver estudo" : "view study"} <ArrowUpRight size={14} /></a><a href={project.repo} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} /></a></div></div>
             </article>
           ))}
         </div>

@@ -102,6 +102,8 @@ h1 em, h2 em { color: var(--lime); font-style: normal; }
 .filter-row button:hover, .filter-row button.active { color: var(--ink); border-color: var(--lime); background: var(--lime); }
 .projects-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 76px 28px; margin-top: 34px; }
 .project-card { min-width: 0; }
+.project-card.featured { position: relative; }
+.project-card.featured::before { position: absolute; top: -12px; left: 0; content: 'SMART15 / MICROTOPOGRAFIA'; color: var(--lime); font: 9px 'DM Mono', monospace; letter-spacing: .07em; }
 .project-visual-anchor { display: block; }
 .project-visual { position: relative; overflow: hidden; height: 310px; background: #111b1a; border: 1px solid var(--line); }
 .project-video-media { width: 100%; height: 100%; object-fit: cover; filter: saturate(.75) brightness(.76); }
@@ -139,6 +141,7 @@ h1 em, h2 em { color: var(--lime); font-style: normal; }
 .project-card p { max-width: 520px; margin-top: 11px; color: #9cac9f; font-size: 13px; line-height: 1.7; }
 .project-footer { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
 .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }.tag-list span { color: #8f9e93; font: 9px 'DM Mono', monospace; text-transform: uppercase; }.tag-list span:not(:last-child)::after { content: '/'; margin-left: 6px; color: var(--lime); }
+.project-actions { display: flex; align-items: center; gap: 14px; }
 .project-footer a { display: flex; align-items: center; gap: 6px; color: var(--lime); font: 10px 'DM Mono', monospace; text-transform: uppercase; white-space: nowrap; }
 .research-section { padding-top: 20px; padding-bottom: 145px; }
 .research-heading { display: flex; align-items: end; justify-content: space-between; gap: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
